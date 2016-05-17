@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/my_actionbar"/>
+
+    <Button
+        android:id="@+id/provider_add_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add To Book" />
+
+    <Button
+        android:id="@+id/provider_query_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Query From Book" />
+
+    <Button
+        android:id="@+id/provider_update_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Book" />
+
+
+    <Button
+        android:id="@+id/provider_delete_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete From Book" />
+
+</LinearLayout>

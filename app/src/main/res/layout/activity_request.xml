@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/my_actionbar" />
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/request_button"
+        android:text="Send Request"
+        android:layout_height="wrap_content" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/request_content"
+            android:layout_height="wrap_content" />
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.benben.firstline">
+
+
+    <!--联系人读取权限-->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <!--短息的权限-->
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <!--发送短信-->
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <!--SD卡写入数据-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--网络-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!--位置信息的权限-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".ui.activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--内容提供者-->
+        <activity android:name=".ui.activity.ContentActivity"></activity>
+        <!--读取联系人-->
+        <activity android:name=".ui.activity.ContentsTestActivity"></activity>
+        <!--读取别个程序的数据-->
+        <activity android:name=".ui.activity.ProviderTestActivity"></activity>
+
+
+
+        <!--多媒体-->
+        <activity android:name=".ui.activity.MediaActivity"></activity>
+        <!--通知-->
+        <activity android:name=".ui.activity.InformActivity"></activity>
+        <!--短息-->
+        <activity android:name=".ui.activity.SMSActivity"></activity>
+        <!--照相机-->
+        <activity android:name=".ui.activity.CameraActivity"></activity>
+        <!--音乐播放器-->
+        <activity android:name=".ui.activity.PlayMusicActivity"></activity>
+        <!--视频播放器-->
+        <activity android:name=".ui.activity.PlayMoveActivity"></activity>
+
+
+
+
+        <!--网络-->
+        <activity android:name=".ui.activity.MyNetWorkActivity"></activity>
+        <!--WebView-->
+        <activity android:name=".ui.activity.WebViewActivity"></activity>
+        <!--HttpURLConnection-->
+        <activity android:name=".ui.activity.HttpURLActivity"></activity>
+
+
+
+        <!--服务-->
+        <activity android:name=".ui.activity.MyServiceActivity"></activity>
+        <!--在子线程中更新UI-->
+        <activity android:name=".ui.activity.MoreThreadActivity"></activity>
+
+
+
+
+        <!--位置服务-->
+        <activity android:name=".ui.activity.lbs.MyLocationBasedServiceActivity"></activity>
+
+
+
+        <!--传感器-->
+        <activity android:name=".ui.activity.sensor.TheSensorActivity"></activity>
+        <!--光线传感器-->
+        <activity android:name=".ui.activity.sensor.BeamActivity"></activity>
+        <!--加速度传感器-->
+        <activity android:name=".ui.activity.sensor.DirectionActivity"></activity>
+        <!--指南针-->
+        <activity android:name=".ui.activity.sensor.CompassActivity"></activity>
+
+
+        <!--活动-->
+        <activity android:name=".ui.activity.activity.activityActivity"></activity>
+        <!--Intent-->
+        <activity android:name=".ui.activity.activity.intent"></activity>
+        <activity android:name=".ui.activity.activity.ReceiveActivity"></activity>
+
+        <!--注册服务-->
+        <service android:name=".Service.MyService"></service>
+        <service android:name=".Service.MyIntentService"></service>
+        <service android:name=".Service.LongRunningService"></service>
+        <!--广播-->
+        <receiver android:name=".Service.AlarmReceiver"></receiver>
+
+
+
+
+        <!--右边-->
+        <!--聊天-->
+        <activity android:name=".ui.activity.chat.ChatActivity"></activity>
+    </application>
+
+</manifest>
