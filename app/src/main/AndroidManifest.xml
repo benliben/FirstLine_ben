@@ -18,6 +18,13 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!--弹出对话框-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -89,11 +96,20 @@
         <activity android:name=".ui.activity.sensor.CompassActivity"></activity>
 
 
+
+        <!--广播机制-->
+        <activity android:name=".ui.activity.radio.RadioActive"></activity>
+        <activity android:name=".ui.activity.radio.RadioFirstActivity"></activity>
+
+
+
+
         <!--活动-->
         <activity android:name=".ui.activity.activity.activityActivity"></activity>
         <!--Intent-->
         <activity android:name=".ui.activity.activity.intent"></activity>
         <activity android:name=".ui.activity.activity.ReceiveActivity"></activity>
+
 
         <!--注册服务-->
         <service android:name=".Service.MyService"></service>
@@ -102,12 +118,35 @@
         <!--广播-->
         <receiver android:name=".Service.AlarmReceiver"></receiver>
 
+        <!--注册广播-->
+        <receiver android:name=".ui.activity.radio.BootCompleteReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".ui.activity.radio.MyBroadcastReceiver">
+            <intent-filter
+
+                android:priority="100">
+                <action android:name="com.example.benben.firstline.MY_BROASCAST"/>
+            </intent-filter>
+        </receiver>
+        <!--登录界面的强制退出-->
+        <receiver android:name=".ui.activity.login.ForceOfflineReceiver">
+            <intent-filter>
+                <action android:name="com.example.benben.firstline.FORCE_OFFLINE"/>
+            </intent-filter>
+        </receiver>
+
 
 
 
         <!--右边-->
         <!--聊天-->
         <activity android:name=".ui.activity.chat.ChatActivity"></activity>
+        <!--登录页面-->
+        <activity android:name=".ui.activity.login.LoginActivity"></activity>
+        <activity android:name=".ui.activity.login.QuitActivity"></activity>
     </application>
 
 </manifest>

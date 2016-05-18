@@ -5,6 +5,7 @@
 
     <include layout="@layout/my_actionbar" />
     <ListView
+        android:dividerHeight="-1dp"
         android:id="@+id/chat_content"
         android:layout_width="match_parent"
         android:layout_weight="1"

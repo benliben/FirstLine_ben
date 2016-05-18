@@ -28,6 +28,7 @@
             android:textColor="#000"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true" />
+
     </RelativeLayout>
 
 

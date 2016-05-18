@@ -1,6 +1,9 @@
 package com.example.benben.firstline.ui.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -20,6 +23,12 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    public static void startMainActivity(Activity activity) {
+        Intent intent = new Intent(activity, MainActivity.class);
+        ActivityCompat.startActivity(activity, intent, null);
+    }
 
     @InjectView(R.id.topLeft)
     ImageView mLeft;

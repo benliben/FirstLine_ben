@@ -33,6 +33,7 @@
                 android:textSize="17sp" />
 
             <TextView
+                android:gravity="center_vertical"
                 android:id="@+id/chat_left_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -72,6 +73,7 @@
                 android:textSize="17sp" />
 
             <TextView
+                android:gravity="center_vertical"
                 android:id="@+id/item_right_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

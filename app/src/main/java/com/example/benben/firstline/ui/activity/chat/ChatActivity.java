@@ -59,7 +59,7 @@ public class ChatActivity extends BaseActivity {
     }
 
     private void initData() {
-        mAdapter=new ChatAdapter(ChatActivity.this,R.layout.item_chat,mModel);
+        mAdapter = new ChatAdapter(ChatActivity.this, R.layout.item_chat, mModel);
         mContent.setAdapter(mAdapter);
         mLeft.setImageResource(R.mipmap.returns);
         mTitle.setText("奔波霸与霸波奔");
@@ -83,7 +83,7 @@ public class ChatActivity extends BaseActivity {
             case R.id.topLeft:
                 finish();
                 break;
-            case R.id.chat_button_left:
+            case R.id.chat_button_right:
                 if (!"".equals(content)) {
                     ChatModel model = new ChatModel(content, ChatModel.CHAT_LEFT);
                     mModel.add(model);
@@ -91,9 +91,9 @@ public class ChatActivity extends BaseActivity {
                     mContent.setSelection(mModel.size());//将listView定位到最后一行
                     mText.setText("");//清空数据
                 }
-                Toast.makeText(ChatActivity.this,"输入数据",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatActivity.this, "输入数据", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.chat_button_right:
+            case R.id.chat_button_left:
                 if (!"".equals(content)) {
                     ChatModel model = new ChatModel(content, ChatModel.CHAT_RIGHT);
                     mModel.add(model);
@@ -101,7 +101,7 @@ public class ChatActivity extends BaseActivity {
                     mContent.setSelection(mModel.size());//将listView定位到最后一行
                     mText.setText("");//清空数据
                 }
-                Toast.makeText(ChatActivity.this,"输入数据",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatActivity.this, "输入数据", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

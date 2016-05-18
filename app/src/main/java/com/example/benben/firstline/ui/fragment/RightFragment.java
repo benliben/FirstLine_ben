@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.benben.firstline.R;
 import com.example.benben.firstline.model.LeftTagModel;
 import com.example.benben.firstline.ui.activity.chat.ChatActivity;
+import com.example.benben.firstline.ui.activity.login.LoginActivity;
 import com.example.benben.firstline.ui.activity.sensor.CompassActivity;
 import com.example.benben.firstline.ui.adapter.LeftAdapter;
 
@@ -35,7 +36,7 @@ public class RightFragment extends BaseFragment {
     RecyclerView rightRecyclerView;
     private View rootView;
 
-    private String[] mData = {"指南针","聊天"};
+    private String[] mData = {"指南针","聊天","登录"};
     private LeftAdapter mAdapter;
     private List<LeftTagModel> mModel = new ArrayList<>();
 
@@ -79,6 +80,9 @@ public class RightFragment extends BaseFragment {
                         break;
                     case 1:
                         ChatActivity.startChatActivity(getActivity());
+                        break;
+                    case 2:
+                        LoginActivity.startLoginActivity(getActivity());
                         break;
                 }
             }

@@ -19,6 +19,7 @@ import com.example.benben.firstline.ui.activity.MyNetWorkActivity;
 import com.example.benben.firstline.ui.activity.MyServiceActivity;
 import com.example.benben.firstline.ui.activity.activity.activityActivity;
 import com.example.benben.firstline.ui.activity.lbs.MyLocationBasedServiceActivity;
+import com.example.benben.firstline.ui.activity.radio.RadioActive;
 import com.example.benben.firstline.ui.activity.sensor.TheSensorActivity;
 import com.example.benben.firstline.ui.adapter.LeftAdapter;
 
@@ -44,7 +45,7 @@ public class LeftFragment extends BaseFragment {
     private List<LeftTagModel> mModel;
     private LeftAdapter mAdapter;
     private String[] mData = {"内容提供器", "运用手机多媒体", "服务","网络","位置的服务"
-                                ,"传感器","活动"};
+                                ,"传感器","活动","广播"};
 
 
     @Nullable
@@ -106,6 +107,9 @@ public class LeftFragment extends BaseFragment {
                     case 6:
                         /**活动*/
                         activityActivity.startactivityActivity(getActivity());
+                        break;
+                    case 7:
+                        RadioActive.startRadioActivity(getActivity());
                         break;
                 }
                 Toast.makeText(getActivity(),"你点击了"+position,Toast.LENGTH_SHORT).show();
