@@ -5,14 +5,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.app.ActivityCompat;
 import android.view.WindowManager;
 
 import com.example.benben.firstline.ui.activity.ActivityCollector;
 import com.example.benben.firstline.ui.activity.MainActivity;
 
 /**
- * Created by tangjunjie on 2016/5/18.
+ * Created by benebn on 2016/5/18.
  */
 public class ForceOfflineReceiver extends BroadcastReceiver{
     @Override

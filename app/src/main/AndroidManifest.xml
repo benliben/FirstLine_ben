@@ -111,6 +111,14 @@
         <activity android:name=".ui.activity.activity.ReceiveActivity"></activity>
 
 
+
+
+        <!--储存-->
+        <activity android:name=".ui.activity.storage.StorageActivity"></activity>
+        <!--文件的储存-->
+        <activity android:name=".ui.activity.storage.FileActivity"></activity>
+
+
         <!--注册服务-->
         <service android:name=".Service.MyService"></service>
         <service android:name=".Service.MyIntentService"></service>
