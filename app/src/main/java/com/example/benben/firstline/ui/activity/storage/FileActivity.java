@@ -68,7 +68,7 @@ public class FileActivity extends BaseActivity {
         String inputText = load();
         Log.i(TAG, "inputText"+inputText);
         if (!TextUtils.isEmpty(inputText)) {
-            Log.i(TAG, "1111111111111111111111111111111111111111111111111");
+
             mContent.setText(inputText);
             mContent.setSelection(inputText.length());
             Toast.makeText(this, "从文件中去读取到了数据",Toast.LENGTH_SHORT).show();

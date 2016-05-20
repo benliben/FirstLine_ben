@@ -45,8 +45,8 @@ public class LeftFragment extends BaseFragment {
 
     private List<LeftTagModel> mModel;
     private LeftAdapter mAdapter;
-    private String[] mData = {"内容提供器", "运用手机多媒体", "服务","网络","位置的服务"
-                                ,"传感器","活动","广播","文件的存储"};
+    private String[] mData = {"内容提供器", "运用手机多媒体", "服务", "网络", "位置的服务"
+            , "传感器", "活动", "广播", "文件的存储"};
 
 
     @Nullable
@@ -109,19 +109,21 @@ public class LeftFragment extends BaseFragment {
                         /**活动*/
                         activityActivity.startactivityActivity(getActivity());
                         break;
+                         /**广播*/
                     case 7:
                         RadioActive.startRadioActivity(getActivity());
                         break;
+                        /**广播*/
                     case 8:
                         StorageActivity.startStorageActivity(getActivity());
                         break;
                 }
-                Toast.makeText(getActivity(),"你点击了"+position,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "你点击了" + position, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void ItemLongClickListener(View view, int position) {
-                Toast.makeText(getActivity(),"你长按了"+position,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "你长按了" + position, Toast.LENGTH_SHORT).show();
 
             }
         });

@@ -117,6 +117,10 @@
         <activity android:name=".ui.activity.storage.StorageActivity"></activity>
         <!--文件的储存-->
         <activity android:name=".ui.activity.storage.FileActivity"></activity>
+        <!--sharedPreferences-->
+        <activity android:name=".ui.activity.storage.SharedActivity"></activity>
+        <!--SQLite-->
+        <activity android:name=".ui.activity.storage.MySQLiteActivity"></activity>
 
 
         <!--注册服务-->

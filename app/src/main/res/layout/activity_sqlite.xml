@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/my_actionbar" />
+
+    <Button
+        android:id="@+id/sqlite_create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="创建" />
+
+    <Button
+        android:id="@+id/sqlite_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="增加" />
+
+    <Button
+        android:id="@+id/sqlite_remove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="删除" />
+
+    <Button
+        android:id="@+id/sqlite_amend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="修改" />
+
+    <Button
+        android:id="@+id/sqlite_find"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="查找" />
+    <Button
+        android:id="@+id/sqlite_replace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="替换" />
+
+
+    <TextView
+        android:id="@+id/sqlite_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:textSize="17sp"
+        android:textColor="#000"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>

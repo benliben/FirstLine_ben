@@ -2,6 +2,7 @@ package com.example.benben.firstline.ui.activity.storage;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -67,6 +68,10 @@ public class StorageActivity extends BaseActivity {
                         FileActivity.startFileActivity(StorageActivity.this);
                         break;
                     case 1:
+                        SharedActivity.startSharedActivity(StorageActivity.this);
+                        break;
+                    case 2:
+                        MySQLiteActivity.startMySQLiteActivity(StorageActivity.this);
                         break;
                 }
             }
@@ -91,5 +96,6 @@ public class StorageActivity extends BaseActivity {
 
     @OnClick(R.id.topLeft)
     public void onClick() {
+        finish();
     }
 }
