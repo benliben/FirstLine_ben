@@ -62,18 +62,23 @@ public class MediaActivity extends BaseActivity {
             public void ItemClickListener(View view, int position) {
                 switch (position) {
                     case 0:
+                        /**通知*/
                         InformActivity.startInformActivity(MediaActivity.this);
                         break;
                     case 1:
+                        /**短信*/
                         SMSActivity.startSMSActivity(MediaActivity.this);
                         break;
                     case 2:
+                        /**照相机*/
                         CameraActivity.startCameraActivity(MediaActivity.this);
                         break;
                     case 3:
+                        /**音乐播放器*/
                         PlayMusicActivity.startPlayMusicActivity(MediaActivity.this);
                         break;
                     case 4:
+                        /**视屏播放器*/
                         PlayMoveActivity.startPlayMoveActivity(MediaActivity.this);
                         break;
                 }

@@ -10,6 +10,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -39,17 +40,16 @@ public class CameraActivity extends BaseActivity {
     }
 
     @InjectView(R.id.topLeft)//返回
-    ImageView mLeft;
+            ImageView mLeft;
     @InjectView(R.id.topTitle)//头部文字
-    TextView mTitle;
+            TextView mTitle;
     @InjectView(R.id.camera_button)//照相按钮
-    Button mButton;
+            Button mButton;
     @InjectView(R.id.camera_imageView)//照相的照片展示
-    ImageView cameraImageView;
+            ImageView cameraImageView;
     @InjectView(R.id.camera_from_album)//相册按钮
-    Button mFromAlbum;
-    @InjectView(R.id.camera_picture)//相册的图片展示
-    ImageView mPicture;
+            Button mFromAlbum;
+
 
     private Uri imageUri;
 
@@ -70,7 +70,7 @@ public class CameraActivity extends BaseActivity {
         mTitle.setText("照相机");
     }
 
-    @OnClick({R.id.topLeft, R.id.camera_button,R.id.camera_from_album})
+    @OnClick({R.id.topLeft, R.id.camera_button, R.id.camera_from_album})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.topLeft:
@@ -78,7 +78,8 @@ public class CameraActivity extends BaseActivity {
                 break;
             case R.id.camera_button:
                 /**创建File对象，用于储存拍照后的照片,并将他存放在手机的SD卡的根目录了下*/
-                File outputImage = new File(Environment.getExternalStorageDirectory(), "tempImage.jpg");//调用Environment的getExternalStorageDirectory()方法可以获取时间SD卡的根目录
+                File outputImage = new File(Environment.getExternalStorageDirectory(), "tempImage1"+System.currentTimeMillis()+".jpg");//调用Environment的getExternalStorageDirectory()方法可以获取时间SD卡的根目录
+                Log.i("lyx", "onClick: " + Environment.getExternalStorageDirectory());
                 try {
                     if (outputImage.exists()) {
                         outputImage.delete();
@@ -96,7 +97,7 @@ public class CameraActivity extends BaseActivity {
                 break;
             case R.id.camera_from_album:
                 /**创建File对象，用于储存选择的照片*/
-                File outPutImage1 = new File(Environment.getExternalStorageDirectory(), "output_image.jpg");
+                File outPutImage1 = new File(Environment.getExternalStorageDirectory(), "output_image"+System.currentTimeMillis()+".jpg");
                 try {
                     if (outPutImage1.exists()) {
                         outPutImage1.delete();
@@ -112,19 +113,21 @@ public class CameraActivity extends BaseActivity {
                 intent1.putExtra("scale", true);
                 intent1.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 startActivityForResult(intent1, CROP_PHOTO);//打开相册程序选择照片
-               /**第二个参数为常量，这样的好处是从相册选择好照片后可以直接进入到CROP_PHOTO的case下将照片显示出来*/
+                /**第二个参数为常量，这样的好处是从相册选择好照片后可以直接进入到CROP_PHOTO的case下将照片显示出来*/
                 break;
         }
     }
 
-    /**拍完照片后对照片进行剪切*/
+    /**
+     * 拍完照片后对照片进行剪切
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
                     /**如果拍照成功*/
-                    Intent intent = new Intent("com.android.camera.cation.CROP");
+                    Intent intent = new Intent("com.android.camera.action.CROP");
                     intent.setDataAndType(imageUri, "image/*");
                     intent.putExtra("scale", true);
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
@@ -132,11 +135,26 @@ public class CameraActivity extends BaseActivity {
                     /**程序又会会掉到onActivityResult（）方法中*/
                 }
                 break;
+
+//            case CROP_PHOTO:
+//                if (resultCode == RESULT_OK) {
+//                    try {
+//                        Bitmap bitmap = BitmapFactory.decodeStream
+//                                (getContentResolver().openInputStream(imageUri));
+//                        cameraImageView.setImageBitmap(bitmap); // 将裁剪后的照片显示出来
+//                    } catch (FileNotFoundException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                break;
+
+
             case CROP_PHOTO:
                 if (resultCode == RESULT_OK) {
                     try {
                         /**将照片解析成Bitmap对象*/
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+                        Log.i("lyx", "onActivityResult: " + bitmap);
                         cameraImageView.setImageBitmap(bitmap);//将剪切后的照片显示出来
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();

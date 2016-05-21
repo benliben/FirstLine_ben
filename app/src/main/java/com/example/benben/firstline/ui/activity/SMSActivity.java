@@ -69,7 +69,6 @@ public class SMSActivity extends BaseActivity {
     private void initData() {
         mLeft.setImageResource(R.mipmap.returns);
         mTitle.setText("短信");
-
     }
 
 
@@ -93,13 +92,11 @@ public class SMSActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.sms_send:
-                Log.i(TAG, "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII: ");
                 SmsManager manager = SmsManager.getDefault();
                 Intent sentIntent = new Intent("SENT_SMA_ACTION");
                 PendingIntent pi = PendingIntent.getBroadcast(SMSActivity.this, 0, sentIntent, 0);
 
                 manager.sendTextMessage(mTo.getText().toString(), null, mInput.getText().toString(), pi, null);//发送短信
-                Log.i(TAG, "IIIIIIIIIIIIIIIIdfasdIIIIIIIIIIIIIIIIIIIIIII: ");
                 break;
         }
     }
@@ -131,6 +128,8 @@ public class SMSActivity extends BaseActivity {
             for (SmsMessage message : messages) {
                 fullMessage += message.getMessageBody();//获取短息内容
             }
+            Log.i(TAG, "电话号码是:"+address);
+            Log.i(TAG, "内容为:"+fullMessage);
             mSender.setText(address);
             mContent.setText(fullMessage);
 

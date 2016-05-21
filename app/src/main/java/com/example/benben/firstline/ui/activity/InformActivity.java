@@ -33,9 +33,8 @@ public class InformActivity extends BaseActivity {
     TextView mTitle;
     @InjectView(R.id.inform_send_notice)
     Button mSendNotice;
-private  int i;
-    private     Resources res;
-    private Notification notification;
+    private int i;
+    private Resources res;
 
     public static void startInformActivity(Activity activity) {
         Intent intent = new Intent(activity, InformActivity.class);
@@ -62,25 +61,14 @@ private  int i;
                 finish();
                 break;
             case R.id.inform_send_notice:
-
-                Intent intent = new Intent(this, ContentsTestActivity.class);
-//                Notification.Builder builder = new Notification.Builder(InformActivity.this)
-//                        .setAutoCancel(true)
-//                        .setContentTitle("头部")
-//                        .setContentText("内容")
-//                        .setContentIntent(PendingIntent.)
-//                        .setSmallIcon(R.mipmap.ic_launcher)
-//                        .setWhen(System.currentTimeMillis())
-//                        .setOngoing(true);
-//                notification=builder.getNotification();
-
-
                 NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                Notification.Builder builder = new Notification.Builder(InformActivity.this);
-                PendingIntent contentIndent = PendingIntent.getActivity(InformActivity.this, 0, new Intent(InformActivity.this,MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+                Intent intent = new Intent(InformActivity.this, MainActivity.class);
+                PendingIntent contentIndent = PendingIntent.getActivity(InformActivity.this, 0, intent
+                        , PendingIntent.FLAG_UPDATE_CURRENT);
 
-                builder . setContentIntent(contentIndent) .setSmallIcon(R.mipmap.ic_launcher)//设置状态栏里面的图标（小图标） 　　　　　　　　　　　　　　　　　　　　
-                         .setLargeIcon(BitmapFactory.decodeResource(res, R.mipmap.hehe))//下拉下拉列表里面的图标（大图标） 　　　
+                Notification.Builder builder = new Notification.Builder(InformActivity.this);
+                builder.setContentIntent(contentIndent).setSmallIcon(R.mipmap.ic_launcher)//设置状态栏里面的图标（小图标） 　　　　　　　　　　　　　　　　　　　　
+                        .setLargeIcon(BitmapFactory.decodeResource(res, R.mipmap.hehe))//下拉下拉列表里面的图标（大图标） 　　　
                         .setTicker("this is bitch!") //设置状态栏的显示的信息
                         .setWhen(System.currentTimeMillis())//设置时间发生时间
                         .setAutoCancel(true)//设置可以清除
@@ -89,7 +77,7 @@ private  int i;
                 Notification notification = builder.getNotification();
                 //加i是为了显示多条Notification
 
-                notificationManager.notify(i,notification);
+                notificationManager.notify(i, notification);
 
                 break;
         }

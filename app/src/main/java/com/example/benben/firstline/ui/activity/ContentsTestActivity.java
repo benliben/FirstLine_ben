@@ -64,8 +64,8 @@ public class ContentsTestActivity extends BaseActivity {
         Cursor cursor = null;
         try {
             /**查询联系人数据*/
-            cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null
-                    , null, null, null);
+            cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI
+                    , null, null, null, null);
             while (cursor.moveToNext()) {
                 /**获取联系人姓名*/
                 String displayName = cursor.getString(cursor.getColumnIndex(
@@ -89,6 +89,7 @@ public class ContentsTestActivity extends BaseActivity {
 
     @OnClick(R.id.topLeft)
     public void onClick() {
+        finish();
     }
 
 
