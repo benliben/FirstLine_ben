@@ -1,21 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_drawerLayout"
-    android:layout_height="match_parent"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <include layout="@layout/my_actionbar"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/my_actionbar" />
+
 
         <FrameLayout
             android:id="@+id/main_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.example.benben.ben_poster_library.PosterLayout
+                    android:id="@+id/first_posterLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    app:autoPlayDuration="3000"
+                    app:defaultImage="@mipmap/ic_launcher"
+                    app:indicatorMargin="10dp"
+                    app:indicatorPosition="rightBottom"
+                    app:indicatorShape="rect"
+                    app:indicatorSpace="3dp"
+                    app:scrollDuration="900"
+                    app:selectedIndicatorColor="?attr/colorPrimary"
+                    app:selectedIndicatorHeight="6dp"
+                    app:selectedIndicatorWidth="6dp"
+                    app:unSelectedIndicatorColor="#99ffffff"
+                    app:unSelectedIndicatorHeight="6dp"
+                    app:unSelectedIndicatorWidth="6dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="第一组广告" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.example.benben.ben_poster_library.PosterLayout
+                    android:id="@+id/first_posterLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    app:autoPlayDuration="4000"
+                    app:defaultImage="@mipmap/ic_launcher"
+                    app:indicatorMargin="10dp"
+                    app:indicatorPosition="centerBottom"
+                    app:indicatorShape="oval"
+                    app:indicatorSpace="3dp"
+                    app:scrollDuration="900"
+                    app:selectedIndicatorColor="?attr/colorAccent"
+                    app:selectedIndicatorHeight="6dp"
+                    app:selectedIndicatorWidth="6dp"
+                    app:unSelectedIndicatorColor="#99ffffff"
+                    app:unSelectedIndicatorHeight="6dp"
+                    app:unSelectedIndicatorWidth="6dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="第二组广告"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
         </FrameLayout>
+
+
     </LinearLayout>
 
 
@@ -31,4 +94,4 @@
         android:layout_height="match_parent"
         android:layout_gravity="right" />
 
-</android.support.v4.widget.DrawerLayout >
+</android.support.v4.widget.DrawerLayout>
