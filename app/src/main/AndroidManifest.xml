@@ -161,6 +161,8 @@
         <activity android:name=".ui.activity.login.QuitActivity"></activity>
         <!--音乐播放器-->
         <activity android:name=".ui.activity.music.MusicActivity" ></activity>
+        <!--获取内存-->
+        <activity android:name=".ui.activity.SDCard.GetStorageActivity"></activity>
     </application>
 
 </manifest>

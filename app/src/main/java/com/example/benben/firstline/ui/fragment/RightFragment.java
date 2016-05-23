@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.benben.firstline.R;
 import com.example.benben.firstline.model.LeftTagModel;
+import com.example.benben.firstline.ui.activity.SDCard.GetStorageActivity;
 import com.example.benben.firstline.ui.activity.chat.ChatActivity;
 import com.example.benben.firstline.ui.activity.login.LoginActivity;
 import com.example.benben.firstline.ui.activity.music.MusicActivity;
@@ -37,7 +38,7 @@ public class RightFragment extends BaseFragment {
     RecyclerView rightRecyclerView;
     private View rootView;
 
-    private String[] mData = {"指南针","聊天","登录","音乐播放"};
+    private String[] mData = {"指南针","聊天","登录","音乐播放","获取内存"};
     private LeftAdapter mAdapter;
     private List<LeftTagModel> mModel = new ArrayList<>();
 
@@ -87,6 +88,8 @@ public class RightFragment extends BaseFragment {
                         break;
                     case 3:
                         MusicActivity.startMusicActivity(getActivity());
+                    case 4:
+                        GetStorageActivity.startGetStorgeActivity(getActivity());
                 }
             }
 
