@@ -159,6 +159,8 @@
         <!--登录页面-->
         <activity android:name=".ui.activity.login.LoginActivity"></activity>
         <activity android:name=".ui.activity.login.QuitActivity"></activity>
+        <!--音乐播放器-->
+        <activity android:name=".ui.activity.music.MusicActivity" ></activity>
     </application>
 
 </manifest>

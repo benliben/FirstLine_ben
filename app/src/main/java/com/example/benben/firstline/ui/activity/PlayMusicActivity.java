@@ -86,6 +86,7 @@ public class PlayMusicActivity extends BaseActivity {
         /**遍历文件里面的音乐文件*/
 
         ContentResolver mResolver = getContentResolver();
+        Log.i(TAG, "initData: "+mResolver);
         /**
          * 歌曲ID：MediaStore.Audio.Media._ID
          Int id = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
@@ -108,18 +109,19 @@ public class PlayMusicActivity extends BaseActivity {
          歌曲文件的大小：MediaStore.Audio.Media.SIZE
          Int size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE));
          */
-//        Cursor cursor = mResolver.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null, null, MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
-//
-//        int id = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media._ID));//歌曲id
-//        String title = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE));//歌曲名称
-//        String album = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));//歌曲的专辑名称
-//        String artist = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST));//歌曲的歌手名
-//        String url = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA));//歌曲的文件路径
-//        int duration = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION));//歌曲的总播放时长
-//        int size = (int) cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE));//歌曲文件的大小
-//
-//
-//        Log.i(TAG, "歌曲id"+id+"歌名"+title+"专辑名"+album+"歌手名"+artist+"文件路径"+url+"总播放时长"+duration+"文件的大小"+size);
+        Cursor cursor = mResolver.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null, null, MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
+        Log.i(TAG, "cursor: "+cursor);
+
+        String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));//歌曲名称
+        int id = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));//歌曲id
+        String album = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM));//歌曲的专辑名称
+        String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));//歌曲的歌手名
+        String url = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));//歌曲的文件路径
+        int duration = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION));//歌曲的总播放时长
+        int size = (int) cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.SIZE));//歌曲文件的大小
+
+
+        Log.i(TAG, "歌曲id"+id+"歌名"+title+"专辑名"+album+"歌手名"+artist+"文件路径"+url+"总播放时长"+duration+"文件的大小"+size);
 
     }
 
