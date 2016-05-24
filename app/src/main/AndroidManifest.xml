@@ -90,10 +90,12 @@
         <activity android:name=".ui.activity.sensor.TheSensorActivity"></activity>
         <!--光线传感器-->
         <activity android:name=".ui.activity.sensor.BeamActivity"></activity>
-        <!--加速度传感器-->
+        <!--方向传感器-->
         <activity android:name=".ui.activity.sensor.DirectionActivity"></activity>
         <!--指南针-->
         <activity android:name=".ui.activity.sensor.CompassActivity"></activity>
+        <!--加速度传感器-->
+        <activity android:name=".ui.activity.sensor.AccelerationActivity"></activity>
 
 
 

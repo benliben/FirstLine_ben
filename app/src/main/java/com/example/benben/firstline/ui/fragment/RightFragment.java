@@ -16,6 +16,7 @@ import com.example.benben.firstline.model.LeftTagModel;
 import com.example.benben.firstline.ui.activity.SDCard.GetStorageActivity;
 import com.example.benben.firstline.ui.activity.chat.ChatActivity;
 import com.example.benben.firstline.ui.activity.login.LoginActivity;
+import com.example.benben.firstline.ui.activity.map.BaiDuMapActivity;
 import com.example.benben.firstline.ui.activity.music.MusicActivity;
 import com.example.benben.firstline.ui.activity.sensor.CompassActivity;
 import com.example.benben.firstline.ui.adapter.LeftAdapter;
@@ -38,7 +39,7 @@ public class RightFragment extends BaseFragment {
     RecyclerView rightRecyclerView;
     private View rootView;
 
-    private String[] mData = {"指南针","聊天","登录","音乐播放","获取内存"};
+    private String[] mData = {"指南针","聊天","登录","音乐播放","获取内存","百度地图"};
     private LeftAdapter mAdapter;
     private List<LeftTagModel> mModel = new ArrayList<>();
 
@@ -78,18 +79,29 @@ public class RightFragment extends BaseFragment {
             public void ItemClickListener(View view, int position) {
                 switch (position) {
                     case 0:
+                        /**指南针*/
                         CompassActivity.startCompassActivity(getActivity());
                         break;
                     case 1:
+                        /**聊天*/
                         ChatActivity.startChatActivity(getActivity());
                         break;
+                    /**登录*/
                     case 2:
                         LoginActivity.startLoginActivity(getActivity());
                         break;
+                    /**音乐*/
                     case 3:
                         MusicActivity.startMusicActivity(getActivity());
+                        break;
+                    /**获取内存*/
                     case 4:
                         GetStorageActivity.startGetStorgeActivity(getActivity());
+                        break;
+                    case 5:
+                    /**百度地图*/
+                        BaiDuMapActivity.startBaiDuMapActivity(getActivity());
+                        break;
                 }
             }
 
