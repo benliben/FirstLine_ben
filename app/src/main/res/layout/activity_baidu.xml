@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/my_actionbar" />
+
+        <RelativeLayout
+            android:id="@+id/map_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.baidu.mapapi.map.MapView
+                android:id="@+id/map_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:id="@+id/map_button1"
+                android:background="@drawable/btn_visitmap_bg"
+                android:src="@mipmap/main_icon_follow"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:padding="5dp"
+                android:layout_marginBottom="20dp"
+                android:layout_alignParentBottom="true"
+                />
+
+        </RelativeLayout>
+
+
+
+
+
+</LinearLayout>
