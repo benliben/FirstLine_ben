@@ -8,5 +8,24 @@
         android:layout_width="wrap_content"
         android:id="@+id/location_content"
         android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.baidu.mapapi.map.MapView
+            android:layout_width="match_parent"
+            android:id="@+id/location_map"
+            android:clickable="true"
+            android:layout_height="match_parent"/>
+        <Button
+            android:id="@+id/location_buttton"
+            android:text="普通地图"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
 
 </LinearLayout>

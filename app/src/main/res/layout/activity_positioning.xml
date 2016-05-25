@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<include layout="@layout/my_actionbar" />-->
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:id="@+id/position_layout"-->
+        <!--android:layout_height="match_parent">-->
+        <!--&lt;!&ndash;百度MapView控件&ndash;&gt;-->
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+            <!--<com.baidu.mapapi.map.MapView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:id="@+id/position_mapView"-->
+                <!--android:clickable="true"-->
+                <!--android:saveEnabled="true"-->
+                <!--android:layout_height="match_parent"/>-->
+            <!--<Button-->
+                <!--android:id="@+id/location_buttton"-->
+                <!--android:text="普通地图"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginBottom="15dp"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_height="wrap_content" />-->
+        <!--</RelativeLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:orientation="vertical"-->
+            <!--android:paddingBottom="105dp"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--&lt;!&ndash;地址信息显示TextView&ndash;&gt;-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:id="@+id/position_text"-->
+                <!--android:gravity="left|center"-->
+                <!--android:maxEms="12"-->
+                <!--android:paddingLeft="12dp"-->
+                <!--android:paddingRight="10dp"-->
+                <!--android:text="当前的位置为："-->
+                <!--android:textColor="#cfcfcf"-->
+                <!--android:textSize="14sp"-->
+                <!--android:layout_height="wrap_content" />-->
+
+        <!--</LinearLayout>-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--&lt;!&ndash;位置指标显示ImageView&ndash;&gt;-->
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:id="@+id/position_img"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginBottom="30dp"-->
+                <!--android:src="@mipmap/icon_visitmap_biao"-->
+                <!--android:layout_height="wrap_content" />-->
+        <!--</LinearLayout>-->
+    <!--</FrameLayout>-->
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="80dip"
+        android:background="#D000"
+        android:minWidth="100dip"
+        android:orientation="vertical"
+        android:padding="2dp" >
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="定位icon" >
+
+            <RadioButton
+                android:id="@+id/defaulticon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="默认图标" >
+            </RadioButton>
+
+            <RadioButton
+                android:id="@+id/customicon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自定义图标" >
+            </RadioButton>
+        </RadioGroup>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="10dip" />
+
+</RelativeLayout>

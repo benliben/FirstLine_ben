@@ -18,7 +18,7 @@ import com.example.benben.firstline.ui.activity.MediaActivity;
 import com.example.benben.firstline.ui.activity.MyNetWorkActivity;
 import com.example.benben.firstline.ui.activity.MyServiceActivity;
 import com.example.benben.firstline.ui.activity.activity.activityActivity;
-import com.example.benben.firstline.ui.activity.lbs.MyLocationBasedServiceActivity;
+import com.example.benben.firstline.ui.activity.activity.location.LocationActivity;
 import com.example.benben.firstline.ui.activity.radio.RadioActive;
 import com.example.benben.firstline.ui.activity.sensor.TheSensorActivity;
 import com.example.benben.firstline.ui.activity.storage.StorageActivity;
@@ -99,7 +99,7 @@ public class LeftFragment extends BaseFragment {
                         break;
                     case 4:
                         /**位置服务*/
-                        MyLocationBasedServiceActivity.startMyLocationBasedServiceActivity(getActivity());
+                        LocationActivity.startLocationActivity(getActivity());
                         break;
                     case 5:
                         /**传感器*/

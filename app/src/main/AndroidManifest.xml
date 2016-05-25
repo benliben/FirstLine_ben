@@ -100,7 +100,14 @@
 
 
         <!--位置服务-->
-        <activity android:name=".ui.activity.lbs.MyLocationBasedServiceActivity"></activity>
+        <activity android:name=".ui.activity.activity.location.LocationActivity"></activity>
+        <!--百度地图-->
+        <activity android:name=".ui.activity.activity.location.MyLocationBasedServiceActivity"></activity>
+        <!--百度定位-->
+        <activity android:name=".ui.activity.activity.location.MyPositioningActivity"></activity>
+        <activity android:name=".ui.activity.activity.location.MyBaiduMap"></activity>
+        <!--路线-->
+        <activity android:name=".ui.activity.activity.location.MapPathActivity"></activity>
 
 
 
@@ -149,6 +156,14 @@
         <service android:name=".Service.LongRunningService"></service>
         <!--广播-->
         <receiver android:name=".Service.AlarmReceiver"></receiver>
+        <!--定位-->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote">
+        </service>
+
+
 
         <!--注册广播-->
         <receiver android:name=".ui.activity.radio.BootCompleteReceiver">

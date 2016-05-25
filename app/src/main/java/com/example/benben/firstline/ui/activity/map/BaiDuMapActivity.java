@@ -58,7 +58,7 @@ public class BaiDuMapActivity extends BaseActivity {
     BitmapDescriptor BD_A = BitmapDescriptorFactory.fromResource(R.mipmap.icon_visitmap_biao);
     /*定位相关*/
     LocationClient mLocClient;
-    public MyLocationListener mListener = new MyLocationListener();
+//    public MyLocationListener mListener = new MyLocationListener();
     private MyLocationConfiguration.LocationMode mCurrentMode;
     BitmapDescriptor mCurrentMarker;
 
@@ -215,23 +215,24 @@ public class BaiDuMapActivity extends BaseActivity {
             }
         });
 
-        mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                Bundle bundle = marker.getExtraInfo();
-//                mBaiduMap.hideInfoWindow();
-                ArrayList<BitmapDescriptor> giflist = new ArrayList<BitmapDescriptor>();
-                if (current_marker != null) {
-                    if (current_marker.equals(marker))
-                        return true;
-                    giflist = current_marker.getIcons();
-                    /**定义Maker坐标点*/
-//                    LatLng point=new LatLng()
-                    /**构建*/
-
-                })
-            }
-        });
+//        mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+//            @Override
+//            public boolean onMarkerClick(Marker marker) {
+//                Bundle bundle = marker.getExtraInfo();
+////                mBaiduMap.hideInfoWindow();
+//                ArrayList<BitmapDescriptor> giflist = new ArrayList<BitmapDescriptor>();
+//                if (current_marker != null) {
+//                    if (current_marker.equals(marker))
+//                        return true;
+//                    giflist = current_marker.getIcons();
+//                    /**定义Maker坐标点*/
+////                    LatLng point=new LatLng()
+//                    /**构建*/
+//                }
+//                return marker;
+//            }
+//
+//        });
     }
 
     private void navigateUpTo(Location location) {

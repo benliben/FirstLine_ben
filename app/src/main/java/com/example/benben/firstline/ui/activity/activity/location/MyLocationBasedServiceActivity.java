@@ -1,4 +1,4 @@
-package com.example.benben.firstline.ui.activity.lbs;
+package com.example.benben.firstline.ui.activity.activity.location;
 
 import android.Manifest;
 import android.app.Activity;
@@ -12,11 +12,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MapView;
 import com.example.benben.firstline.R;
 import com.example.benben.firstline.ui.activity.BaseActivity;
 
@@ -28,7 +33,7 @@ import butterknife.OnClick;
 
 /**
  * Created by benben on 2016/5/14.
- *
+ * <p/>
  * 定位系统
  * <p/>
  * GPS_PROVIDER  GPS定位（精度高，耗电）
@@ -43,6 +48,14 @@ public class MyLocationBasedServiceActivity extends BaseActivity {
     TextView mTitle;
     @InjectView(R.id.location_content)
     TextView mContent;
+    int a=1;
+    /**
+     * 百度地图控件
+     */
+    @InjectView(R.id.location_map)
+    MapView mMap;
+    @InjectView(R.id.location_buttton)
+    Button mButtton;
 
     private String provider;
 
@@ -54,14 +67,31 @@ public class MyLocationBasedServiceActivity extends BaseActivity {
         ActivityCompat.startActivity(activity, intent, null);
     }
 
+    /**百度地图控件*/
+    /**
+     * 百度地图对象
+     */
+    private BaiduMap mBaiduMap;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_locatin);
         ButterKnife.inject(this);
         initVeiw();
         initLBC();
+        init();
     }
+
+    private void init() {
+        mMap.removeViewAt(1);
+        mMap.removeViewAt(2);
+        mBaiduMap = mMap.getMap();
+
+    }
+
 
     /**
      * 初始化View
@@ -106,12 +136,25 @@ public class MyLocationBasedServiceActivity extends BaseActivity {
         // 的OnLocationChanged（）方法
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMap.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mMap.onPause();
+    }
 
     /**
      * 关闭程序
      */
     @Override
     protected void onDestroy() {
+        mMap.onDestroy();
+        mMap = null;
         super.onDestroy();
         if (locationManager != null) {
             /**关闭程序是将监听移动器*/
@@ -163,8 +206,39 @@ public class MyLocationBasedServiceActivity extends BaseActivity {
         mContent.setText(currentPosition);
     }
 
-    @OnClick(R.id.topLeft)
-    public void onClick() {
-        finish();
+    @OnClick({R.id.topLeft, R.id.location_buttton})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.topLeft:
+                finish();
+                break;
+            case R.id.location_buttton:
+                if (a == 0) {
+                    /**普通地图*/
+                    mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
+                    a = 1;
+                    mButtton.setText("普通地图");
+                } else if (a == 1) {
+                    /**卫星地图*/
+                    mBaiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);
+                    a = 2;
+                    mButtton.setText("卫星地图");
+                } else if (a == 2) {
+                    /**开启交通图*/
+                    mBaiduMap.setTrafficEnabled(true);
+                    a = 3;
+                    mButtton.setText("交通地图");
+                } else if (a == 3) {
+                    /**开启热力图*/
+                    mBaiduMap.setBaiduHeatMapEnabled(true);
+                    a = 0;
+                    mButtton.setText("热力地图");
+                }
+                break;
+
+        }
+
     }
+
+
 }
