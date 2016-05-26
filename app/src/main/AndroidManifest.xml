@@ -108,6 +108,8 @@
         <activity android:name=".ui.activity.activity.location.MyBaiduMap"></activity>
         <!--路线-->
         <activity android:name=".ui.activity.activity.location.MapPathActivity"></activity>
+        <!--路线2-->
+        <activity android:name=".ui.activity.activity.location.MapPathActivity2"></activity>
 
 
 

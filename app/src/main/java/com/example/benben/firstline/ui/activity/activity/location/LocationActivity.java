@@ -38,7 +38,7 @@ public class LocationActivity extends BaseActivity {
 
     private List<LeftTagModel> mModel = new ArrayList<>();
     private LeftAdapter mAdapter;
-    private String[] mDate = {"百度地图", "定位","定位2","路线"};
+    private String[] mDate = {"百度地图", "定位","定位2","路线","路线2"};
 
     public static void startLocationActivity(Activity activity) {
         Intent intent = new Intent(activity, LocationActivity.class);
@@ -83,10 +83,16 @@ public class LocationActivity extends BaseActivity {
                         MyPositioningActivity.startMyPositioningActivity(LocationActivity.this);
                         break;
                     case 2:
+                        /*定位2*/
                         MyBaiduMap.startMyBaiduMap(LocationActivity.this);
                         break;
                     case 3:
+                        /*路线*/
                         MapPathActivity.startMapPathActivity(LocationActivity.this);
+                        break;
+                    case 4:
+                    /*路线2*/
+                        MapPathActivity2.startMapPathActivity2(LocationActivity.this);
                         break;
                 }
             }

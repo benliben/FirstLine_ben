@@ -103,6 +103,8 @@ public class TheSensorActivity extends BaseActivity {
     }
 
     private void initData() {
+        mLeft.setImageResource(R.mipmap.returns);
+        mTitle.setText("传感器");
         for (int i = 0; i < mData.length; i++) {
             LeftTagModel model = new LeftTagModel();
             model.setName(mData[i]);
