@@ -58,7 +58,7 @@ public class TheSensorActivity extends BaseActivity {
     RecyclerView mContent;
 
 
-    private String[] mData = {"光照传感器", "加速传感器", "方向传感器", "指南针"};
+    private String[] mData = {"光照传感器", "加速传感器", "方向传感器", ""};
     private LeftAdapter mAdapter;
     private List<LeftTagModel> mModel=new ArrayList<>();
 
@@ -89,7 +89,7 @@ public class TheSensorActivity extends BaseActivity {
                         DirectionActivity.startDirectionActivity(TheSensorActivity.this);
                         break;
                     case 3:
-                        CompassActivity.startCompassActivity(TheSensorActivity.this);
+
                         break;
                 }
             }

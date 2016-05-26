@@ -116,7 +116,12 @@
         <!--光线传感器-->
         <activity android:name=".ui.activity.sensor.BeamActivity"></activity>
         <!--方向传感器-->
-        <activity android:name=".ui.activity.sensor.DirectionActivity"></activity>
+        <activity android:name=".ui.activity.sensor.DirectionActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <!--指南针-->
         <activity android:name=".ui.activity.sensor.CompassActivity"></activity>
         <!--加速度传感器-->

@@ -10,6 +10,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
@@ -30,6 +31,7 @@ import butterknife.OnClick;
 public class CompassActivity extends BaseActivity {
 
 
+    private static final String TAG = "lyx";
     @InjectView(R.id.topLeft)
     ImageView mLeft;
     @InjectView(R.id.topTitle)
@@ -50,8 +52,6 @@ public class CompassActivity extends BaseActivity {
         ButterKnife.inject(this);
 
         initData();
-
-
         initView();
     }
 
@@ -98,7 +98,7 @@ public class CompassActivity extends BaseActivity {
                 magneticValues = event.values.clone();
             }
             float[] R = new float[9];//创建长度为9的values数租
-            float[] values = new float[3];//长度为3
+            float  values[] = new float[3];//长度为3
 
             /**
              * 第一个参数 R 是一个长度为 9 的 float 数组，getRotationMatrix()方法计算出的旋转数据就会赋值到这个数组当中。
