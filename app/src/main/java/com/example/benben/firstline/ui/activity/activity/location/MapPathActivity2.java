@@ -11,9 +11,11 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ZoomControls;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -27,10 +29,12 @@ import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.navi.NaviParaOption;
 import com.baidu.mapapi.search.core.RouteLine;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.route.BikingRouteLine;
@@ -49,6 +53,8 @@ import com.baidu.mapapi.search.route.WalkingRouteLine;
 import com.baidu.mapapi.search.route.WalkingRoutePlanOption;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.example.benben.firstline.R;
+import com.example.benben.firstline.gps.LocationInfo;
+import com.example.benben.firstline.http.LoadDialog;
 import com.example.benben.firstline.ui.activity.BaseActivity;
 import com.example.benben.firstline.ui.activity.overlayutil.BikingRouteOverlay;
 import com.example.benben.firstline.ui.activity.overlayutil.DrivingRouteOverlay;
@@ -60,7 +66,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
+
 
 /**
  * Created by benben on 2016/5/26.
@@ -73,6 +79,11 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
         Intent intent = new Intent(activity, MapPathActivity2.class);
         ActivityCompat.startActivity(activity, intent, null);
     }
+
+
+    LocationInfo locationInfo;
+    PlanNode enNode;//搜索的终点
+    PlanNode stNode;//搜索的起点
 
     /**
      * 浏览路线节点相关
@@ -112,6 +123,124 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
     /**是否首次定位*/
     boolean isFirstLoc = true;
 
+
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        SDKInitializer.initialize(getApplicationContext());
+        setContentView(R.layout.activity_path);
+        ButterKnife.inject(this);
+        LoadDialog.Show(MapPathActivity2.this, "正在定位中...");
+        mBaiduMap = mMapView.getMap();
+        mBtnPre = (Button) findViewById(R.id.pre);
+        mBtnNext = (Button) findViewById(R.id.next);
+        mBtnPre.setVisibility(View.INVISIBLE);
+        mBtnNext.setVisibility(View.INVISIBLE);
+        /**地图的点击事件*/
+        mBaiduMap.setOnMapClickListener(this);
+        /**初始化搜索模块事件，注册监听*/
+        mSearch = RoutePlanSearch.newInstance();
+        mSearch.setOnGetRoutePlanResultListener(this);
+        if (ll==null){
+            refresh();
+        }else {
+            Toast.makeText(MapPathActivity2.this, "正在定位中...",Toast.LENGTH_SHORT).show();
+//            LoadDialog.Show(MapPathActivity2.this, "正在定位中...");
+            MapStatusUpdate u = MapStatusUpdateFactory
+                    .newLatLng(ll);
+            mBaiduMap.setMapStatus(u);
+            bindData();
+        }
+        initMap();
+         }
+
+    private void refresh() {
+        Toast.makeText(MapPathActivity2.this, "正在定位中...",Toast.LENGTH_SHORT).show();
+//        LoadDialog.Show(MapPathActivity2.this, "正在定位中...");
+//        CoreService.requestLocation(new IGPSCallback() {
+//            @Override
+//            public boolean gpsCallback(LocationInfo location) {
+//                LoadDialog.Hide();
+//                locationInfo = location;
+//                MapStatusUpdate u = MapStatusUpdateFactory
+//                        .newLatLng(ll);
+//                if (mBaiduMap != null) {
+//                    mBaiduMap.animateMapStatus(u);
+//                    bindData();
+//                }
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean failCallBack(String error) {
+//                Toast.makeText(MapPathActivity2.this, "定位失败", Toast.LENGTH_SHORT).show();
+//                return super.failCallBack(error);
+//            }
+//        });
+
+    }
+
+    private void bindData() {
+
+        PlanNode stNode = PlanNode.withLocation(ll);
+        DrivingRoutePlanOption option = new DrivingRoutePlanOption();
+        option.from(stNode);
+
+    }
+
+    /**
+     * 地图初始化
+     */
+    private void initMap() {
+        mBaiduMap = mMapView.getMap();
+        /**隐藏百度logo*/
+        mMapView.removeViewAt(1);
+        /**隐藏缩放控件ZoomControl*/
+        View child = mMapView.getChildAt(1);
+        if (child instanceof ImageView || child instanceof ZoomControls) {
+            child.setVisibility(View.INVISIBLE);
+        }
+        /**隐藏左边规格*/
+        mMapView.removeViewAt(2);
+        // 开启定位图层
+        mBaiduMap.setMyLocationEnabled(true);
+        // 定位初始化
+        mLocationClient = new LocationClient(this);
+        //注册监听事件
+        mLocationClient.registerLocationListener(myListener);
+        initLocation();
+    }
+    private void initLocation() {
+        Log.i(TAG, "____________________________2_____________________________________");
+        LocationClientOption option = new LocationClientOption();
+        // option.setLocationMode(LocationMode.Hight_Accuracy);//
+        // 可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
+        // 坐标类型分为三种：国测局经纬度坐标系(gcj02)，百度墨卡托坐标系(bd09)，百度经纬度坐标系(bd09ll)。
+        option.setCoorType("bd09ll");// 可选，默认gcj02，设置返回的定位结果坐标系
+        int span = 1000;
+        option.setScanSpan(span);// 可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
+        option.setIsNeedAddress(true);// 可选，设置是否需要地址信息，默认不需要
+        option.setOpenGps(true);// 可选，默认false,设置是否使用gps
+        option.setNeedDeviceDirect(true);// 返回的结果包含手机的方向
+        // option.setLocationNotify(true);//
+        // 可选，默认false，设置是否当gps有效时按照1S1次频率输出GPS结果
+        // option.setIsNeedLocationDescribe(true);//
+        // 可选，默认false，设置是否需要位置语义化结果，可以在BDLocation.getLocationDescribe里得到，结果类似于“在北京天安门附近”
+        option.setIsNeedLocationPoiList(true);//
+        // 可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
+        // option.setIgnoreKillProcess(false);//
+        // 可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
+        // option.SetIgnoreCacheException(false);//
+        // 可选，默认false，设置是否收集CRASH信息，默认收集
+        // option.setEnableSimulateGps(false);// 可选，默认false，设置是否需要过滤gps仿真结果，默认需要
+        mLocationClient.setLocOption(option);
+        LoadDialog.Hide();
+        mLocationClient.start();// 开始定位
+    }
+
     /**定位SDK监听函数*/
     public class MyLocationListenner implements BDLocationListener {
         @Override
@@ -124,14 +253,15 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
             MyLocationData locData = new MyLocationData.Builder()
                     .accuracy(location.getRadius())
                     // 此处设置开发者获取到的方向信息，顺时针0-360
-                    .direction(0).latitude(location.getLatitude())
+                    .direction(0)
+                    .latitude(location.getLatitude())
                     .longitude(location.getLongitude())
                     .build();
             mBaiduMap.setMyLocationData(locData);//设置定位数据
             if (isFirstLoc) {
                 isFirstLoc = false;
                 // 获取精度维度坐标
-                 ll = new LatLng(location.getLatitude(), location.getLongitude());//经纬度
+                ll = new LatLng(location.getLatitude(), location.getLongitude());//经纬度
                 MapStatus.Builder builder = new MapStatus.Builder();
                 builder.target(ll).zoom(19.0f);
                 // animationMapStatus()方法把定位到的点移动到地图中心
@@ -196,76 +326,13 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
                 }
 //                System.out.println("BaiduLocationApiDem" + sb.toString());
                 Log.i(TAG, "onReceiveLocation: " + sb.toString());
+                LoadDialog.Hide();
                 new AlertDialog.Builder(MapPathActivity2.this).setTitle("定位").setMessage(sb.toString()).show();
             }
         }
     }
 
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        SDKInitializer.initialize(getApplicationContext());
-        setContentView(R.layout.activity_path);
-        ButterKnife.inject(this);
-
-        mBaiduMap = mMapView.getMap();
-        mBtnPre = (Button) findViewById(R.id.pre);
-        mBtnNext = (Button) findViewById(R.id.next);
-        mBtnPre.setVisibility(View.INVISIBLE);
-        mBtnNext.setVisibility(View.INVISIBLE);
-        /**地图的点击事件*/
-        mBaiduMap.setOnMapClickListener(this);
-        /**初始化搜索模块事件，注册监听*/
-        mSearch = RoutePlanSearch.newInstance();
-        mSearch.setOnGetRoutePlanResultListener(this);
-        initMap();
-         }
-
-    /**
-     * 地图初始化
-     */
-    private void initMap() {
-        mBaiduMap = mMapView.getMap();
-        /**隐藏百度logo*/
-        mMapView.removeViewAt(1);
-        /**隐藏左边规格*/
-//        mMapView.removeViewAt(2);
-        // 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);
-        // 定位初始化
-        mLocationClient = new LocationClient(this);
-        //注册监听事件
-        mLocationClient.registerLocationListener(myListener);
-        initLocation();
-    }
-    private void initLocation() {
-        Log.i(TAG, "____________________________2_____________________________________");
-        LocationClientOption option = new LocationClientOption();
-        // option.setLocationMode(LocationMode.Hight_Accuracy);//
-        // 可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
-        // 坐标类型分为三种：国测局经纬度坐标系(gcj02)，百度墨卡托坐标系(bd09)，百度经纬度坐标系(bd09ll)。
-        option.setCoorType("bd09ll");// 可选，默认gcj02，设置返回的定位结果坐标系
-        int span = 1000;
-        option.setScanSpan(span);// 可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
-        option.setIsNeedAddress(true);// 可选，设置是否需要地址信息，默认不需要
-        option.setOpenGps(true);// 可选，默认false,设置是否使用gps
-        option.setNeedDeviceDirect(true);// 返回的结果包含手机的方向
-        // option.setLocationNotify(true);//
-        // 可选，默认false，设置是否当gps有效时按照1S1次频率输出GPS结果
-        // option.setIsNeedLocationDescribe(true);//
-        // 可选，默认false，设置是否需要位置语义化结果，可以在BDLocation.getLocationDescribe里得到，结果类似于“在北京天安门附近”
-        option.setIsNeedLocationPoiList(true);//
-        // 可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
-        // option.setIgnoreKillProcess(false);//
-        // 可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
-        // option.SetIgnoreCacheException(false);//
-        // 可选，默认false，设置是否收集CRASH信息，默认收集
-        // option.setEnableSimulateGps(false);// 可选，默认false，设置是否需要过滤gps仿真结果，默认需要
-        mLocationClient.setLocOption(option);
-        mLocationClient.start();// 开始定位
-    }
     /*************************************************路线**************************************************/
 
     /**
@@ -284,8 +351,10 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
         EditText editEn = (EditText) findViewById(R.id.path_end);
         /**设置起终点信息，对于tranist search来说，城市名无意义*/
 //      ll
-        PlanNode stNode = PlanNode.withCityNameAndPlaceName("北京", editSt.getText().toString());
-        PlanNode enNode = PlanNode.withCityNameAndPlaceName("北京", editEn.getText().toString());
+         stNode = PlanNode.withCityNameAndPlaceName("北京", editSt.getText().toString());
+         enNode = PlanNode.withCityNameAndPlaceName("北京", editEn.getText().toString());
+        SearchResult searchResult;
+// View poi=search
         Log.i(TAG, "ll"+ll);
         Log.i(TAG, "enNode"+enNode);
         /**实际使用中请对起点终点城市进行正确的设定*/
@@ -305,7 +374,7 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
                 mSearch.bikingSearch((new BikingRoutePlanOption()).from(PlanNode.withLocation(ll)).to(
                         enNode));// 骑行搜索
             }
-
+            LoadDialog.Show(MapPathActivity2.this,"正在规划路线，请稍后...");
         }else {
             if (v.getId() == R.id.path_drive) {
                 mSearch.drivingSearch((new DrivingRoutePlanOption()).from(stNode)
@@ -320,6 +389,7 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
                 mSearch.bikingSearch((new BikingRoutePlanOption()).from(stNode).
                         to(enNode));// 骑行搜索
             }
+            LoadDialog.Show(MapPathActivity2.this,"正在规划路线，请稍后...");
         }
     }
 
@@ -378,12 +448,11 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(nodeLocation));
         // show popup
         popupText = new TextView(MapPathActivity2.this);
-//        popupText.setBackgroundResource(R.drawable.popup);//设置背景
+        popupText.setBackgroundResource(R.mipmap.popup);//设置背景
         popupText.setTextColor(0xFF000000);
         popupText.setText(nodeTitle);
         mBaiduMap.showInfoWindow(new InfoWindow(popupText, nodeLocation, 0));
-        new AlertDialog.Builder(MapPathActivity2.this).setTitle(nodeTitle)
-                .setMessage(nodeTitle).show();
+//        new AlertDialog.Builder(MapPathActivity2.this).setTitle(nodeTitle).setMessage(nodeTitle).show();
     }
 
     /**
@@ -391,7 +460,6 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
      * @param v
      */
     public void changeRouteIcon(View v) {
-        Log.i(TAG, "_______________________3______________________");
         if (routeOverlay == null) {
             return;
         }
@@ -419,7 +487,7 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
     @SuppressWarnings({ "unchecked", "unchecked" })
     @Override
     public void onGetBikingRouteResult(BikingRouteResult bikingRouteResult) {
-        Log.i(TAG, "_______________________4______________________");
+        LoadDialog.Hide();
         if (bikingRouteResult == null
                 || bikingRouteResult.error != SearchResult.ERRORNO.NO_ERROR) {
             Toast.makeText(MapPathActivity2.this, "抱歉，未找到结果",
@@ -452,8 +520,8 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
                         .setTitle("骑行方案").setMessage(datas.toString()).show();
                 System.out.println(datas.toString());
             }
+//            LoadDialog.Show(MapPathActivity2.this,"正在规划路线中，请稍后...");
             // java.lang.ClassCastException: java.util.ArrayList cannot be cast to com.baidu.mapapi.search.route.BikingRouteLine
-
 
         }
     }
@@ -461,7 +529,7 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
     /**开车路线*/
     @Override
     public void onGetDrivingRouteResult(DrivingRouteResult result) {
-        Log.i(TAG, "_______________________5______________________");
+        LoadDialog.Hide();
         if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
             Toast.makeText(MapPathActivity2.this, "抱歉，未找到结果",
                     Toast.LENGTH_SHORT).show();
@@ -501,7 +569,7 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
     /**公交车路线*/
     @Override
     public void onGetTransitRouteResult(TransitRouteResult result) {
-        Log.i(TAG, "——————————————————6——————————————————: ");
+        LoadDialog.Hide();
         if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
             Toast.makeText(MapPathActivity2.this, "抱歉未找到结果",
                     Toast.LENGTH_SHORT).show();
@@ -540,7 +608,7 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
     /**步行路线*/
     @Override
     public void onGetWalkingRouteResult(WalkingRouteResult result) {
-        Log.i(TAG, "——————————————————7——————————————————: ");
+        LoadDialog.Hide();
         if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
             Toast.makeText(MapPathActivity2.this, "抱歉未找到结果",
                     Toast.LENGTH_SHORT).show();
@@ -578,13 +646,11 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
 
     @Override
     public void onMapClick(LatLng latLng) {
-        Log.i(TAG, "——————————————————8——————————————————: ");
         mBaiduMap.hideInfoWindow();
     }
 
     @Override
     public boolean onMapPoiClick(MapPoi mapPoi) {
-        Log.i(TAG, "——————————————————9——————————————————: ");
         return false;
     }
 
@@ -598,7 +664,7 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
         @Override
         public BitmapDescriptor getStartMarker() {
             if (useDefaultIcon) {
-                return BitmapDescriptorFactory.fromResource(R.mipmap.icon_st);
+                return BitmapDescriptorFactory.fromResource(R.mipmap.icon_track_navi_end);
             }
             return null;
         }
@@ -606,7 +672,7 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
         @Override
         public BitmapDescriptor getTerminalMarker() {
             if (useDefaultIcon) {
-                return BitmapDescriptorFactory.fromResource(R.mipmap.icon_en);
+                return BitmapDescriptorFactory.fromResource(R.mipmap.icon_track_navi_start);
             }
             return null;
         }
@@ -621,7 +687,7 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
         @Override
         public BitmapDescriptor getStartMarker() {
             if (useDefaultIcon) {
-                return BitmapDescriptorFactory.fromResource(R.mipmap.icon_st);
+                return BitmapDescriptorFactory.fromResource(R.mipmap.icon_track_navi_end);
             }
             return null;
         }
@@ -629,7 +695,7 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
         @Override
         public BitmapDescriptor getTerminalMarker() {
             if (useDefaultIcon) {
-                return BitmapDescriptorFactory.fromResource(R.mipmap.icon_en);
+                return BitmapDescriptorFactory.fromResource(R.mipmap.icon_track_navi_start);
             }
             return null;
         }
@@ -643,7 +709,7 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
         @Override
         public BitmapDescriptor getStartMarker() {
             if (useDefaultIcon) {
-                return BitmapDescriptorFactory.fromResource(R.mipmap.icon_st);
+                return BitmapDescriptorFactory.fromResource(R.mipmap.icon_track_navi_end);
             }
             return null;
         }
@@ -651,7 +717,7 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
         @Override
         public BitmapDescriptor getTerminalMarker() {
             if (useDefaultIcon) {
-                return BitmapDescriptorFactory.fromResource(R.mipmap.icon_en);
+                return BitmapDescriptorFactory.fromResource(R.mipmap.icon_track_navi_start);
             }
             return null;
         }
@@ -667,7 +733,7 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
         @Override
         public BitmapDescriptor getStartMarker() {
             if (useDefaultIcon) {
-                return BitmapDescriptorFactory.fromResource(R.mipmap.icon_st);
+                return BitmapDescriptorFactory.fromResource(R.mipmap.icon_track_navi_end);
             }
             return null;
         }
@@ -675,7 +741,7 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
         @Override
         public BitmapDescriptor getTerminalMarker() {
             if (useDefaultIcon) {
-                return BitmapDescriptorFactory.fromResource(R.mipmap.icon_en);
+                return BitmapDescriptorFactory.fromResource(R.mipmap.icon_track_navi_start);
             }
             return null;
         }
@@ -703,5 +769,21 @@ public class MapPathActivity2 extends BaseActivity implements OnGetRoutePlanResu
         mMapView.onDestroy();
         mMapView = null;
         super.onDestroy();
+    }
+
+
+    /**
+     * 开始导航
+     */
+    public void startNavi() {
+        LatLng put = new LatLng(locationInfo.getLatitude(), locationInfo.getLongitude());
+
+        final NaviParaOption para = new NaviParaOption();
+        para.startPoint(ll);
+        para.startName("从这里开始");
+        EditText editEn = (EditText) findViewById(R.id.path_end);
+        enNode = PlanNode.withCityNameAndPlaceName("北京", editEn.getText().toString());
+//        para.endPoint(enNode);
+        para.endName("到这里结束");
     }
 }

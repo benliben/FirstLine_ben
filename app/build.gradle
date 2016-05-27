@@ -31,4 +31,7 @@ dependencies {
     compile project(':ben_poster_library')
     /**百度地图*/
     compile files('libs/BaiduLBS_Android.jar')
+    compile project(':dialog')
+
+    compile 'de.greenrobot:eventbus:3.0.0-beta1'
 }

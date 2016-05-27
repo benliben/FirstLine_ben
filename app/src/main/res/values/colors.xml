@@ -6,4 +6,14 @@
 
 
     <color name="content">#808080</color>
+
+    <!-- dialog color -->
+    <color name="dialog_title">#3CAC17</color>
+    <color name="dialog_message">#363636</color>
+    <color name="dialog_positive">#1E88E5</color>
+    <color name="dialog_negative">#F44336</color>
+    <color name="dialog_neutral">#F44336</color>
+    <color name="dialog_divider">#D5D5D5</color>
+    <color name="dialog_line">#CACACA</color>
+    <color name="dialog_bg">#FBFBFB</color>
 </resources>

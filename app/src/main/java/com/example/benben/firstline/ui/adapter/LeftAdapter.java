@@ -10,7 +10,7 @@ import com.example.benben.firstline.R;
 
 
 /**
- * Created by tangjunjie on 2016/5/11.
+ * Created by benben  on 2016/5/11.
  */
 public class LeftAdapter  extends RecyclerView.Adapter<LeftAdapter.ViewHolder>{
 

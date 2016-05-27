@@ -110,6 +110,8 @@
         <activity android:name=".ui.activity.activity.location.MapPathActivity"></activity>
         <!--路线2-->
         <activity android:name=".ui.activity.activity.location.MapPathActivity2"></activity>
+        <!--poi搜索功能-->
+        <activity android:name=".ui.activity.activity.location.PoiSearchActivity"></activity>
 
 
 
@@ -163,7 +165,7 @@
         <service android:name=".Service.LongRunningService"></service>
         <!--广播-->
         <receiver android:name=".Service.AlarmReceiver"></receiver>
-        <!--定位-->
+        <!--定位用的服务-->
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"

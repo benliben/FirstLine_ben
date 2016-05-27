@@ -38,7 +38,7 @@ public class LocationActivity extends BaseActivity {
 
     private List<LeftTagModel> mModel = new ArrayList<>();
     private LeftAdapter mAdapter;
-    private String[] mDate = {"百度地图", "定位","定位2","路线","路线2"};
+    private String[] mDate = {"百度地图", "定位","定位2","路线","路线2","poi搜索功能"};
 
     public static void startLocationActivity(Activity activity) {
         Intent intent = new Intent(activity, LocationActivity.class);
@@ -93,6 +93,9 @@ public class LocationActivity extends BaseActivity {
                     case 4:
                     /*路线2*/
                         MapPathActivity2.startMapPathActivity2(LocationActivity.this);
+                        break;
+                    case 5:
+                        PoiSearchActivity.startPoiSearchActivity(LocationActivity.this);
                         break;
                 }
             }

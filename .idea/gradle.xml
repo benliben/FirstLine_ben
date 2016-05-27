@@ -9,14 +9,18 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/baidumap" />
             <option value="$PROJECT_DIR$/ben_poster_library" />
+            <option value="$PROJECT_DIR$/dialog" />
           </set>
         </option>
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/baidumap" />
             <option value="$PROJECT_DIR$/ben_poster_library" />
+            <option value="$PROJECT_DIR$/dialog" />
           </set>
         </option>
       </GradleProjectSettings>

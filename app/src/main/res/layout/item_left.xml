@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingLeft="64dp"
         android:src="@mipmap/cllection_btn_no" />
 
     <TextView
@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:drawableRight="@mipmap/make_sure_the_order_arrow_r"
         android:gravity="center"
-        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingRight="64dp"
         android:textSize="17sp"
         android:textColor="#fff" />
 
