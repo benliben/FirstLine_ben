@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/baidu" />
             <option value="$PROJECT_DIR$/baidumap" />
             <option value="$PROJECT_DIR$/ben_poster_library" />
             <option value="$PROJECT_DIR$/dialog" />
@@ -18,6 +19,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/baidu" />
             <option value="$PROJECT_DIR$/baidumap" />
             <option value="$PROJECT_DIR$/ben_poster_library" />
             <option value="$PROJECT_DIR$/dialog" />

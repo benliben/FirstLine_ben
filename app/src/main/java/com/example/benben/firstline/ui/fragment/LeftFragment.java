@@ -19,6 +19,7 @@ import com.example.benben.firstline.ui.activity.MyNetWorkActivity;
 import com.example.benben.firstline.ui.activity.MyServiceActivity;
 import com.example.benben.firstline.ui.activity.activity.activityActivity;
 import com.example.benben.firstline.ui.activity.activity.location.LocationActivity;
+import com.example.benben.firstline.ui.activity.baidumap.BaiDuMapDemoActivity;
 import com.example.benben.firstline.ui.activity.radio.RadioActive;
 import com.example.benben.firstline.ui.activity.sensor.TheSensorActivity;
 import com.example.benben.firstline.ui.activity.storage.StorageActivity;
@@ -46,7 +47,7 @@ public class LeftFragment extends BaseFragment {
     private List<LeftTagModel> mModel;
     private LeftAdapter mAdapter;
     private String[] mData = {"内容提供器", "运用手机多媒体", "服务", "网络", "位置的服务"
-            , "传感器", "活动", "广播", "文件的存储"};
+            , "传感器", "活动", "广播", "文件的存储","百度地图Demo"};
 
 
     @Nullable
@@ -117,6 +118,8 @@ public class LeftFragment extends BaseFragment {
                     case 8:
                         StorageActivity.startStorageActivity(getActivity());
                         break;
+                    case 9:
+                        BaiDuMapDemoActivity.startBaiDuMapDemoActivity(getActivity());
                 }
                 Toast.makeText(getActivity(), "你点击了" + position, Toast.LENGTH_SHORT).show();
             }

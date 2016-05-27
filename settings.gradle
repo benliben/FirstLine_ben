@@ -1,1 +1,1 @@
-include ':app', ':ben_poster_library', ':dialog', ':baidumap'
+include ':app', ':ben_poster_library', ':dialog', ':baidumap', ':baidu'
