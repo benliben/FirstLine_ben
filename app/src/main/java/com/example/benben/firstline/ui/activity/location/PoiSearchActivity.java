@@ -1,4 +1,4 @@
-package com.example.benben.firstline.ui.activity.activity.location;
+package com.example.benben.firstline.ui.activity.location;
 
 import android.app.Activity;
 import android.content.Intent;

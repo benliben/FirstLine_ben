@@ -5,6 +5,11 @@ import android.util.Log;
 /**
  * Created by benben on 2016/5/14.
  * 日志类
+ *
+ * 然后我们只需要修改 LEVEL 常量的值，就可以自由地控制日志的打印行为了。
+ *          比如让LEVEL 等于 VERBOSE 就可以把所有的日志都打印出来，
+             让 LEVEL 等于 WARN 就可以只打印警告以上级别的日志
+             ，让 LEVEL 等于 NOTHING 就可以把所有日志都屏蔽掉。
  */
 public class LogUtil {
     public static final  int  VERBOSE=1;

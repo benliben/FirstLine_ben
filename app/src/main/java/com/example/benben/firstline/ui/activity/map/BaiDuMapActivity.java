@@ -1,12 +1,6 @@
 package com.example.benben.firstline.ui.activity.map;
-
-import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
@@ -14,10 +8,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ZoomControls;
-
-import com.baidu.location.LocationClient;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -26,18 +17,12 @@ import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.model.LatLngBounds;
 import com.baidu.mapapi.model.inner.GeoPoint;
 import com.example.benben.firstline.R;
 import com.example.benben.firstline.ui.activity.BaseActivity;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -54,22 +39,13 @@ public class BaiDuMapActivity extends BaseActivity {
         ActivityCompat.startActivity(activity, intent, null);
     }
 
-
     BitmapDescriptor BD_A = BitmapDescriptorFactory.fromResource(R.mipmap.icon_visitmap_biao);
     /*定位相关*/
-    LocationClient mLocClient;
-//    public MyLocationListener mListener = new MyLocationListener();
     private MyLocationConfiguration.LocationMode mCurrentMode;
     BitmapDescriptor mCurrentMarker;
-
-
     BaiduMap mBaiduMap;
-
-    boolean isFirstloc = true;//是否为首次定位
-
     LatLngBounds latLngBounds;
 
-    Marker current_marker;
 
 
     @InjectView(R.id.map_view)
@@ -83,8 +59,7 @@ public class BaiDuMapActivity extends BaseActivity {
     @InjectView(R.id.map_content)
     RelativeLayout mContent;
 
-    private LocationManager mManager;
-    private String provider;
+
 
 
     @Override
@@ -95,55 +70,19 @@ public class BaiDuMapActivity extends BaseActivity {
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_baidu);
         ButterKnife.inject(this);
-
-
         initView();
-
     }
 
 
     private void initView() {
         mLeft.setImageResource(R.mipmap.returns);
         mTitle.setText("百度地图");
-//        mManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-//        /*获取所有可用的位置提供器*/
-//        List<String> providerlist = mManager.getProviders(true);
-//        if (providerlist.contains(LocationManager.GPS_PROVIDER)) {
-//            provider = LocationManager.GPS_PROVIDER;
-//        } else if (providerlist.contains(LocationManager.NETWORK_PROVIDER)) {
-//            provider = LocationManager.NETWORK_PROVIDER;
-//        } else {
-//            /**当没有可用的位置提供器时，弹出toast提示用户*/
-//            Toast.makeText(BaiDuMapActivity.this, "没有位置可用，请GPS或者WiFi定位", Toast.LENGTH_SHORT).show();
-//        }
-//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            // TODO: Consider calling
-//            //    ActivityCompat#requestPermissions
-//            // here to request the missing permissions, and then overriding
-//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//            //                                          int[] grantResults)
-//            // to handle the case where the user grants the permission. See the documentation
-//            // for ActivityCompat#requestPermissions for more details.
-//            return;
-//        }
-//        Location location = mManager.getLastKnownLocation(provider);
-//        if (location != null) {
-//            navigateUpTo(location);
-//        }
 
         mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
-
         View.OnClickListener btnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (mCurrentMode) {
-                    //                    case NORMAL:
-//                        requestLocButton.setImageResource(R.drawable.main_icon_follow);
-//                        mCurrentMode = MyLocationConfiguration.LocationMode.FOLLOWING;
-//                        mBaiduMap
-//                                .setMyLocationConfigeration(new MyLocationConfiguration(
-//                                        mCurrentMode, true, mCurrentMarker));
-//                        break;
                     case COMPASS:
                         requestLocButton.setImageResource(R.mipmap.main_icon_follow);
                         mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
@@ -166,7 +105,6 @@ public class BaiDuMapActivity extends BaseActivity {
             }
         };
         requestLocButton.setOnClickListener(btnClickListener);
-
 
         mBaiduMap = mMapView.getMap();
         /**开启定位图层*/
@@ -215,41 +153,7 @@ public class BaiDuMapActivity extends BaseActivity {
             }
         });
 
-//        mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
-//            @Override
-//            public boolean onMarkerClick(Marker marker) {
-//                Bundle bundle = marker.getExtraInfo();
-////                mBaiduMap.hideInfoWindow();
-//                ArrayList<BitmapDescriptor> giflist = new ArrayList<BitmapDescriptor>();
-//                if (current_marker != null) {
-//                    if (current_marker.equals(marker))
-//                        return true;
-//                    giflist = current_marker.getIcons();
-//                    /**定义Maker坐标点*/
-////                    LatLng point=new LatLng()
-//                    /**构建*/
-//                }
-//                return marker;
-//            }
-//
-//        });
     }
-
-    private void navigateUpTo(Location location) {
-//        int count = mView.get();
-
-// 删除缩放控件
-        mMapView.removeViewAt(2);
-// 删除百度地图logo
-        mMapView.removeViewAt(1);
-
-        GeoPoint point = new GeoPoint((int) (location.getLatitude() * 1E6), (int) (location.getLongitude() * 1E6));
-//        controll
-        MyLocationData.Builder locationData = new MyLocationData.Builder();
-
-    }
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();

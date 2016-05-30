@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -30,10 +31,13 @@ import com.example.benben.firstline.R;
 public class GeoCoderDemo extends Activity implements OnGetGeoCoderResultListener {
 
 
+    private static final String TAG = "GeoCoderDemo";
+
     public static void startGeoCoderDemo(Activity activity) {
         Intent intent = new Intent(activity, GeoCoderDemo.class);
         ActivityCompat.startActivity(activity, intent, null);
     }
+
     GeoCoder mSearch = null; // 搜索模块，也可去掉地图模块独立使用
     BaiduMap mBaiduMap = null;
     MapView mMapView = null;
@@ -63,8 +67,9 @@ public class GeoCoderDemo extends Activity implements OnGetGeoCoderResultListene
         if (v.getId() == R.id.reversegeocode) {
             EditText lat = (EditText) findViewById(R.id.lat);
             EditText lon = (EditText) findViewById(R.id.lon);
-            LatLng ptCenter = new LatLng((Float.valueOf(lat.getText()
-                    .toString())), (Float.valueOf(lon.getText().toString())));
+            LatLng ptCenter = new LatLng(
+                    (Float.valueOf(lat.getText().toString())),
+                    (Float.valueOf(lon.getText().toString())));
             // 反Geo搜索
             mSearch.reverseGeoCode(new ReverseGeoCodeOption()
                     .location(ptCenter));
@@ -74,6 +79,7 @@ public class GeoCoderDemo extends Activity implements OnGetGeoCoderResultListene
             // Geo搜索
             mSearch.geocode(new GeoCodeOption().city(
                     editCity.getText().toString()).address(editGeoCodeKey.getText().toString()));
+            Log.i(TAG, "msearch"+mSearch);
         }
     }
 
@@ -111,6 +117,7 @@ public class GeoCoderDemo extends Activity implements OnGetGeoCoderResultListene
                 .getLocation()));
         String strInfo = String.format("纬度：%f 经度：%f",
                 result.getLocation().latitude, result.getLocation().longitude);
+        Log.i(TAG, "Info"+strInfo);
         Toast.makeText(GeoCoderDemo.this, strInfo, Toast.LENGTH_LONG).show();
     }
 

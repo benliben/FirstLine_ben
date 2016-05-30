@@ -114,18 +114,18 @@
 
 
         <!--位置服务-->
-        <activity android:name=".ui.activity.activity.location.LocationActivity"></activity>
+        <activity android:name=".ui.activity.location.LocationActivity"></activity>
         <!--百度地图-->
-        <activity android:name=".ui.activity.activity.location.MyLocationBasedServiceActivity"></activity>
+        <activity android:name=".ui.activity.location.MyLocationBasedServiceActivity"></activity>
         <!--百度定位-->
-        <activity android:name=".ui.activity.activity.location.MyPositioningActivity"></activity>
-        <activity android:name=".ui.activity.activity.location.MyBaiduMap"></activity>
+        <activity android:name=".ui.activity.location.MyPositioningActivity"></activity>
+        <activity android:name=".ui.activity.location.MyBaiduMap"></activity>
         <!--路线-->
-        <activity android:name=".ui.activity.activity.location.MapPathActivity"></activity>
+        <activity android:name=".ui.activity.location.MapPathActivity"></activity>
         <!--路线2-->
-        <activity android:name=".ui.activity.activity.location.MapPathActivity2"></activity>
+        <activity android:name=".ui.activity.location.MapPathActivity2"></activity>
         <!--poi搜索功能-->
-        <activity android:name=".ui.activity.activity.location.PoiSearchActivity"></activity>
+        <activity android:name=".ui.activity.location.PoiSearchActivity"></activity>
 
 
 
