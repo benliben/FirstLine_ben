@@ -19,6 +19,7 @@ import com.example.benben.firstline.ui.activity.login.LoginActivity;
 import com.example.benben.firstline.ui.activity.map.BaiDuMapActivity;
 import com.example.benben.firstline.ui.activity.music.MusicActivity;
 import com.example.benben.firstline.ui.activity.sensor.CompassActivity;
+import com.example.benben.firstline.ui.activity.weather.WeatherActivity;
 import com.example.benben.firstline.ui.adapter.LeftAdapter;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class RightFragment extends BaseFragment {
     RecyclerView rightRecyclerView;
     private View rootView;
 
-    private String[] mData = {"指南针","聊天","登录","音乐播放","获取内存","百度地图"};
+    private String[] mData = {"指南针","聊天","登录","音乐播放","获取内存","百度地图","犇犇天气"};
     private LeftAdapter mAdapter;
     private List<LeftTagModel> mModel = new ArrayList<>();
 
@@ -102,6 +103,11 @@ public class RightFragment extends BaseFragment {
                     /**百度地图*/
                         BaiDuMapActivity.startBaiDuMapActivity(getActivity());
                         break;
+                    case 6:
+                        /**犇犇天气*/
+                        WeatherActivity.startWeatherActivity(getActivity());
+                        break;
+
                 }
             }
 

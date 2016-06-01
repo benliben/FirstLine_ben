@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.example.benben.firstline.R;
@@ -11,26 +12,20 @@ import com.example.benben.firstline.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.OnItemClick;
 
 /**
- * Created by benben  on 2016/5/11.
+ * Created by beneben on 2016/6/1.
  */
-public class LeftAdapter  extends RecyclerView.Adapter<LeftAdapter.ViewHolder>{
+public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHolder> {
 
-    private String[] mDates;
     private List<String> dataList = new ArrayList<>();
     private OnItemClickListener mListener;
 
-
-    public LeftAdapter(String[] mDates) {
-        this.mDates = mDates;
+    public WeatherAdapter(List<String> dataList) {
+        this.dataList = dataList;
     }
 
-    public LeftAdapter() {
-
-    }
-
-    /**创建viewHolder*/
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_left, parent, false);
@@ -39,17 +34,15 @@ public class LeftAdapter  extends RecyclerView.Adapter<LeftAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.mTx.setText(mDates[position]);
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        holder.mTx.setText(dataList.get(position));
 
-
-        /**点击事件*/
         if (mListener != null) {
             holder.mTx.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos=holder.getAdapterPosition();//得到item对象的位置
-                    mListener.ItemClickListener(holder.itemView,pos);
+                    int pos = holder.getAdapterPosition();
+                    mListener.ItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -63,12 +56,11 @@ public class LeftAdapter  extends RecyclerView.Adapter<LeftAdapter.ViewHolder>{
                 }
             });
         }
-
     }
 
     @Override
     public int getItemCount() {
-        return mDates.length;
+        return dataList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -78,8 +70,6 @@ public class LeftAdapter  extends RecyclerView.Adapter<LeftAdapter.ViewHolder>{
             mTx = (TextView) itemView.findViewById(R.id.text);
         }
     }
-
-
     /**添加点击事件*/
     public interface OnItemClickListener{
         void ItemClickListener(View view, int position);

@@ -11,8 +11,6 @@
     <uses-permission android:name="android.permission.SEND_SMS"/>
     <!--SD卡写入数据-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--网络-->
-    <uses-permission android:name="android.permission.INTERNET"/>
     <!--位置信息的权限-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -64,11 +62,7 @@
             android:value="hEtxetd6RUjoU1VfFzjbvpeFj781lbQX"/>
         <!--百度地图-->
         <activity android:name=".ui.activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <!--内容提供者-->
@@ -135,10 +129,10 @@
         <activity android:name=".ui.activity.sensor.BeamActivity"></activity>
         <!--方向传感器-->
         <activity android:name=".ui.activity.sensor.DirectionActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <!--指南针-->
         <activity android:name=".ui.activity.sensor.CompassActivity"></activity>
@@ -404,6 +398,17 @@
         <activity android:name=".ui.activity.SDCard.GetStorageActivity"></activity>
         <!--百度地图-->
         <activity android:name=".ui.activity.map.BaiDuMapActivity"></activity>
+        <!--天气预报-->
+        <activity android:name=".ui.activity.weather.WeatherActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.weather.ChooseAreaActivity"></activity>
+        <!--天气预报注册服务和广播接收-->
+        <service android:name=".Service.AutoUpdateService"></service>
+        <receiver android:name=".receiver.AutoUpdateReceiver"></receiver>
     </application>
 
 </manifest>

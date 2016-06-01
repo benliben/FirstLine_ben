@@ -18,7 +18,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 /**
- * Created by tangjunjie on 2016/5/18.
+ * Created by beneben on 2016/5/18.
  */
 public class QuitActivity extends BaseActivity {
     @InjectView(R.id.topLeft)
