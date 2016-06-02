@@ -62,7 +62,10 @@
             android:value="hEtxetd6RUjoU1VfFzjbvpeFj781lbQX"/>
         <!--百度地图-->
         <activity android:name=".ui.activity.MainActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <!--内容提供者-->
@@ -83,7 +86,6 @@
         <!--照相机-->
         <activity android:name=".ui.activity.CameraActivity"></activity>
         <!--音乐播放器-->
-        <activity android:name=".ui.activity.PlayMusicActivity"></activity>
         <!--视频播放器-->
         <activity android:name=".ui.activity.PlayMoveActivity"></activity>
 
@@ -135,7 +137,6 @@
             <!--</intent-filter>-->
         </activity>
         <!--指南针-->
-        <activity android:name=".ui.activity.sensor.CompassActivity"></activity>
         <!--加速度传感器-->
         <activity android:name=".ui.activity.sensor.AccelerationActivity"></activity>
 
@@ -400,10 +401,7 @@
         <activity android:name=".ui.activity.map.BaiDuMapActivity"></activity>
         <!--天气预报-->
         <activity android:name=".ui.activity.weather.WeatherActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".ui.activity.weather.ChooseAreaActivity"></activity>
         <!--天气预报注册服务和广播接收-->

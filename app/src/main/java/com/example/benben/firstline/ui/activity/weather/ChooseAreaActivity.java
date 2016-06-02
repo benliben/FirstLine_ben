@@ -143,7 +143,6 @@ public class ChooseAreaActivity extends BaseActivity {
                         }
                     }
                 } else if ("weatherCode".equals(type)) {
-                    Log.i("lyx", "___________1__________");
                     /*处理服务器返回的天气信息*/
                     Utility.handleWeatherResponse(ChooseAreaActivity.this, response);
                     runOnUiThread(new Runnable() {

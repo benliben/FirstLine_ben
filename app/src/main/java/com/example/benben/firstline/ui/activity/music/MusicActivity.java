@@ -26,6 +26,7 @@ import com.example.benben.firstline.R;
  * 音乐播放器
  *
  *
+ *
  *1. Open Core 是 Android 多媒体框架的核心，所有 Android 平台的音频、视频的采用以及播放等操作，都是通过它来实现。
  2、Open Core 的具体功能
 
@@ -150,6 +151,29 @@ public class MusicActivity extends ListActivity {
     }
 
     private void initData() {
+        /**遍历文件里面的音乐文件*/
+        /**
+         * 歌曲ID：MediaStore.Audio.Media._ID
+         Int id = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
+
+         歌曲的名称：MediaStore.Audio.Media.TITLE
+         String tilte = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE));
+
+         歌曲的专辑名：MediaStore.Audio.Media.ALBUM
+         String album = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));
+
+         歌曲的歌手名：MediaStore.Audio.Media.ARTIST
+         String artist = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST));
+
+         歌曲文件的路径：MediaStore.Audio.Media.DATA
+         String url = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA));
+
+         歌曲的总播放时长：MediaStore.Audio.Media.DURATION
+         Int duration = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION));
+
+         歌曲文件的大小：MediaStore.Audio.Media.SIZE
+         Int size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE));
+         */
 
     }
 

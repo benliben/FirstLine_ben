@@ -18,7 +18,7 @@ import com.example.benben.firstline.ui.activity.chat.ChatActivity;
 import com.example.benben.firstline.ui.activity.login.LoginActivity;
 import com.example.benben.firstline.ui.activity.map.BaiDuMapActivity;
 import com.example.benben.firstline.ui.activity.music.MusicActivity;
-import com.example.benben.firstline.ui.activity.sensor.CompassActivity;
+import com.example.benben.firstline.ui.activity.sensor.DirectionActivity;
 import com.example.benben.firstline.ui.activity.weather.WeatherActivity;
 import com.example.benben.firstline.ui.adapter.LeftAdapter;
 
@@ -81,7 +81,7 @@ public class RightFragment extends BaseFragment {
                 switch (position) {
                     case 0:
                         /**指南针*/
-                        CompassActivity.startCompassActivity(getActivity());
+                        DirectionActivity.startDirectionActivity(getActivity());
                         break;
                     case 1:
                         /**聊天*/

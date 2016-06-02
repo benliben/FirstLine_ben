@@ -124,7 +124,6 @@ public class WeatherActivity extends BaseActivity {
                     selectedCity = cityList.get(position);
                     queryCounty();
                 } else if (currentLevel == LEVEL_COUNTY) {
-
                     String countyCode = countyList.get(position).getCountyCode();
                     Intent intent = new Intent(WeatherActivity.this, ChooseAreaActivity.class);
                     intent.putExtra("county_code", countyCode);
@@ -216,10 +215,8 @@ public class WeatherActivity extends BaseActivity {
             public void onFinish(String response) {
                 boolean result = false;
                 if ("province".equals(type)) {
-                    Log.i("lyx", "________________________75_____________________: ");
                     result = Utility.handleProvincesResponse(mDB, response);
                 } else if ("city".equals(type)) {
-                    Log.i("lyx", "________________________74_____________________: ");
                     result = Utility.handleCityResponse(mDB, response, selectedProvince.getId());
                 } else if ("county".equals(type)) {
                     result = Utility.handleCountyResponse(mDB, response, selectedCity.getId());

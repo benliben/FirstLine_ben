@@ -50,7 +50,7 @@ public class PlayMoveActivity extends BaseActivity {
     @InjectView(R.id.move_stop)
     Button mStop;
 
-    private VideoView videoView;
+//    private VideoView videoView=new VideoView(this);
 
     public static void startPlayMoveActivity(Activity activity) {
         Intent intent = new Intent(activity, PlayMoveActivity.class);
@@ -68,7 +68,7 @@ public class PlayMoveActivity extends BaseActivity {
 
     private void initVideoView() {
         File file = new File(Environment.getExternalStorageDirectory(), "movie.3gp");//指定播放视频文件的路径
-        videoView.setVideoPath(file.getPath());
+        mContent.setVideoPath(file.getPath());
     }
 
     private void initView() {
@@ -83,20 +83,20 @@ public class PlayMoveActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.move_play:
-                if (!videoView.isPlaying()) {
-                    videoView.start();
+                if (!mContent.isPlaying()) {
+                    mContent.start();
                     Log.i(TAG, "播放视频");
                 }
                 break;
             case R.id.move_pause:
-                if (videoView.isPlaying()) {
-                    videoView.pause();
+                if (mContent.isPlaying()) {
+                    mContent.pause();
                     Log.i(TAG, "暂停播放视频");
                 }
                 break;
             case R.id.move_stop:
-                if (videoView.isPlaying()) {
-                    videoView.resume();
+                if (mContent.isPlaying()) {
+                    mContent.resume();
                     Log.i(TAG, "停止播放视频");
                 }
                 break;
@@ -106,8 +106,8 @@ public class PlayMoveActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (videoView.isPlaying()) {
-            videoView.suspend();
+        if (mContent.isPlaying()) {
+            mContent.suspend();
         }
     }
 }

@@ -95,9 +95,7 @@ public class Utility {
      * 解析服务器返回的JSON数据，并将解析的数据存储到本地
      */
     public static void handleWeatherResponse(Context context, String response) {
-        Log.i("lyx", "________2_____________: ");
         try {
-            Log.i("lyx", "________3____________: ");
             JSONObject object = new JSONObject(response);
             JSONObject weatherInfo = object.getJSONObject("weatherinfo");
             String cityName = weatherInfo.getString("city");
@@ -108,7 +106,6 @@ public class Utility {
             String publishTime = weatherInfo.getString("ptime");
             saveWeatherInfo(context, cityName, weatherCode, temp1, temp2, weatherDesp, publishTime);
         } catch (JSONException e) {
-            Log.i("lyx", "________4_____________: "+e);
             e.printStackTrace();
         }
     }
@@ -117,11 +114,8 @@ public class Utility {
      * 将服务器返回的所有天气信息存储到SharedPreferences文件中。
      */
     public static void saveWeatherInfo(Context context, String cityName, String weatherCode, String temp1, String temp2, String weatherDesp, String publishTime) {
-        Log.i("lyx", "________5_____________: ");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年M月d日", Locale.CHINA);
-        Log.i("lyx", "________6_____________: ");
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-        Log.i("lyx", "________4_____________: ");
         Log.i("lyx", "saveWeatherInfo: "+cityName+weatherCode+temp1+temp2+weatherDesp+publishTime);
         editor.putBoolean("city_selected", true);
         editor.putString("city_name", cityName);

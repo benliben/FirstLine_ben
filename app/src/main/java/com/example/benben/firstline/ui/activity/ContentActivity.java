@@ -87,6 +87,7 @@ public class ContentActivity extends BaseActivity {
     }
 
     private void initData() {
+        mLeft.setImageResource(R.mipmap.returns);
         for (int i = 0; i < mDates.length; i++) {
             LeftTagModel model = new LeftTagModel();
             model.setName(mDates[i]);
@@ -96,5 +97,6 @@ public class ContentActivity extends BaseActivity {
 
     @OnClick(R.id.topLeft)
     public void onClick() {
+        finish();
     }
 }

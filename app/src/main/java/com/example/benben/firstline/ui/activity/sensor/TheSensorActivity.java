@@ -58,7 +58,7 @@ public class TheSensorActivity extends BaseActivity {
     RecyclerView mContent;
 
 
-    private String[] mData = {"光照传感器", "加速传感器", "方向传感器", ""};
+    private String[] mData = {"光照传感器", "加速传感器", "方向传感器",};
     private LeftAdapter mAdapter;
     private List<LeftTagModel> mModel=new ArrayList<>();
 
@@ -114,5 +114,6 @@ public class TheSensorActivity extends BaseActivity {
 
     @OnClick(R.id.topLeft)
     public void onClick() {
+        finish();
     }
 }

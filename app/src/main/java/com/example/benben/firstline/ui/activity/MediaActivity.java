@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.benben.firstline.R;
 import com.example.benben.firstline.model.LeftTagModel;
+import com.example.benben.firstline.ui.activity.music.MusicActivity;
 import com.example.benben.firstline.ui.adapter.LeftAdapter;
 
 import java.util.ArrayList;
@@ -75,7 +76,7 @@ public class MediaActivity extends BaseActivity {
                         break;
                     case 3:
                         /**音乐播放器*/
-                        PlayMusicActivity.startPlayMusicActivity(MediaActivity.this);
+                        MusicActivity.startMusicActivity(MediaActivity.this);
                         break;
                     case 4:
                         /**视屏播放器*/
